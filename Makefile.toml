@@ -1,0 +1,26 @@
+env_files = [
+  { path = "./.env", profile = "production" },
+  { path = "./.env.test", profile = "development" },
+]
+
+[tasks.run]
+description = "Run app"
+dependencies = []
+command = "cargo"
+args = ["run"]
+
+[tasks.test]
+description = "Run unit tests"
+command = "cargo"
+args = ["test"]
+dependencies = []
+
+[tasks.lint]
+description = "Run lint"
+command = "cargo"
+args = ["clippy"]
+
+[tasks.format]
+description = "Run the cargo rustfmt plugin."
+command = "cargo"
+args = ["fmt", "--all"]
