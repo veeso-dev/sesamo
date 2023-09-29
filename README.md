@@ -1,13 +1,7 @@
-# Rust-template
+# sesamo
 
-<p align="center">~  ~</p>
-<p align="center">
-  <a href="#get-started-">Get started</a>
-  ·
-  <a href="https://crates.io/crates/rust-template" target="_blank">Crates.io</a>
-</p>
 <p align="center">Developed by <a href="https://veeso.dev/" target="_blank">@veeso</a></p>
-<p align="center">Current version: 0.1.0 (26/06/2023)</p>
+<p align="center">Current version: 0.1.0 (29/09/2023)</p>
 
 <p align="center">
   <a href="https://opensource.org/license/mit/"
@@ -15,71 +9,68 @@
       src="https://img.shields.io/badge/License-MIT-teal.svg"
       alt="License-MIT"
   /></a>
-  <a href="https://github.com/veeso-dev/rust-template/stargazers"
+  <a href="https://github.com/veeso-dev/sesamo/stargazers"
     ><img
-      src="https://img.shields.io/github/stars/veeso-dev/rust-template.svg"
+      src="https://img.shields.io/github/stars/veeso-dev/sesamo.svg"
       alt="Repo stars"
-  /></a>
-  <a href="https://crates.io/crates/rust-template"
-    ><img
-      src="https://img.shields.io/crates/d/rust-template.svg"
-      alt="Downloads counter"
-  /></a>
-  <a href="https://crates.io/crates/rust-template"
-    ><img
-      src="https://img.shields.io/crates/v/rust-template.svg"
-      alt="Latest version"
-  /></a>
-  <a href="https://ko-fi.com/veeso">
-    <img
-      src="https://img.shields.io/badge/donate-ko--fi-red"
-      alt="Ko-fi"
   /></a>
 </p>
 <p align="center">
-  <a href="https://github.com/veeso-dev/rust-template/actions"
+  <a href="https://github.com/veeso-dev/sesamo/actions"
     ><img
-      src="https://github.com/veeso-dev/rust-template/workflows/build-test/badge.svg"
+      src="https://github.com/veeso-dev/sesamo/workflows/build-test/badge.svg"
       alt="Linux CI"
   /></a>
 </p>
 
 ---
 
-- [Rust-template](#rust-template)
-  - [About rust-template](#about-rust-template)
+- [sesamo](#sesamo)
+  - [About sesamo](#about-sesamo)
   - [Get started](#get-started)
-    - [Run with docker](#run-with-docker)
-  - [rust-template API](#rust-template-api)
+    - [Setup env](#setup-env)
+    - [Setup AWS credentials](#setup-aws-credentials)
+    - [Run with Cargo make](#run-with-cargo-make)
+  - [sesamo API](#sesamo-api)
     - [Check](#check)
-  - [Support the developer](#support-the-developer)
-  - [Contributing and issues](#contributing-and-issues)
+    - [Send](#send)
   - [Changelog](#changelog)
   - [License](#license)
 
 ---
 
-## About rust-template
+## About sesamo
 
-rust-template is a Rust web service which comes integrated with ClamAV. The service provides an API endpoint to scan files with ClamAV.
+sesamo is a Rust web service which exposes an endpoint to send custom email to custom recipients.
 
 ---
 
 ## Get started
 
-### Run with docker
-
-The entire rust-template web service comes with a docker compose file to easily run the service on your machine.
-Just run:
+### Setup env
 
 ```sh
-docker-compose build
-docker-compose up -d
+cp .env.test .env
+vim .env
 ```
 
-At this point rust-template will be served on the specified port in the docker-compose file. (Default: `3010`)
+```env
+EMAIL_SENDER=EMAIL_ADDRESS_CONFIGURED_TO_AWS_SES
+WEB_PORT=3001
+```
 
-## rust-template API
+### Setup AWS credentials
+
+AWS credentials must be configured with aws-cli with `aws configure`.
+Credentials are then automatically loaded from defined profile
+
+### Run with Cargo make
+
+```sh
+cargo make -p production run
+```
+
+## sesamo API
 
 ### Check
 
@@ -89,44 +80,38 @@ Check web service status:
 GET /check
 ```
 
-Response:
+Response: Empty (200)
+
+### Send
+
+Send email to recipients with provided subject and body
+
+```txt
+POST /send
+```
+
+Body:
 
 ```json
 {
-  "status": "ok"
+  "recipients": ["test@test.com", "foo@bar.com"],
+  "subject": "email subject",
+  "body": "BODY BASE64 ENCODED"
 }
 ```
 
----
-
-## Support the developer
-
-If you like rust-template and you're grateful for the work I've done, please consider a little donation 🥳
-
-You can make a donation with one of these platforms:
-
-[![ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/veeso)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.me/chrisintin)
-
----
-
-## Contributing and issues
-
-Contributions, bug reports, new features and questions are welcome! 😉
-If you have any question or concern, or you want to suggest a new feature, or you want just want to improve pavao, feel free to open an issue or a PR.
-
-Please follow [our contributing guidelines](CONTRIBUTING.md)
+Response: Empty (200)
 
 ---
 
 ## Changelog
 
-View rust-template's changelog [HERE](CHANGELOG.md)
+View sesamo's changelog [HERE](CHANGELOG.md)
 
 ---
 
 ## License
 
-rust-template is licensed under the MIT license.
+sesamo is licensed under the MIT license.
 
 You can read the entire license [HERE](LICENSE)

@@ -4,7 +4,10 @@
 
 /// App configuration read from environment
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Config {}
+pub struct Config {
+    pub email_sender: String,
+    pub web_port: u16,
+}
 
 impl Config {
     pub fn try_from_env() -> anyhow::Result<Self> {
