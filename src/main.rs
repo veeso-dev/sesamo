@@ -9,6 +9,9 @@ mod config;
 mod test;
 mod web;
 
+use std::io::Write;
+use std::path::Path;
+
 const APP_NAME: &str = env!("CARGO_PKG_NAME");
 const APP_AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -27,8 +30,26 @@ async fn main() -> anyhow::Result<()> {
     info!("initializing web service...");
     let web_service =
         web::WebServer::init(config.web_port, aws_config, &config.email_sender).await?;
+
+    #[cfg(target_family = "unix")]
+    if let Some(pidfile) = config.pidfile.as_deref() {
+        debug!("writing pidfile to {}", pidfile.display());
+        write_pidfile(pidfile)?;
+        info!("pidfile written");
+    }
+
     info!("web service OK; running web server...");
     web_service.run().await?;
+
+    Ok(())
+}
+
+#[cfg(target_family = "unix")]
+fn write_pidfile(pidfile: &Path) -> anyhow::Result<()> {
+    let pid = std::process::id();
+
+    let mut f = std::fs::File::create(pidfile)?;
+    writeln!(&mut f, "{pid}")?;
 
     Ok(())
 }

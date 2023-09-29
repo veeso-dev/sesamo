@@ -2,10 +2,14 @@
 //!
 //! App configuration
 
+use std::path::PathBuf;
+
 /// App configuration read from environment
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     pub email_sender: String,
+    #[cfg(target_family = "unix")]
+    pub pidfile: Option<PathBuf>,
     pub web_port: u16,
 }
 
