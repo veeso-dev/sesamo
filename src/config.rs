@@ -8,9 +8,9 @@ use std::path::PathBuf;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     pub email_sender: String,
+    pub listen_url: String,
     #[cfg(target_family = "unix")]
     pub pidfile: Option<PathBuf>,
-    pub web_port: u16,
 }
 
 impl Config {

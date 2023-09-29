@@ -56,7 +56,8 @@ vim .env
 
 ```env
 EMAIL_SENDER=EMAIL_ADDRESS_CONFIGURED_TO_AWS_SES
-WEB_PORT=3001
+LISTEN_URL=127.0.0.1:3001
+PIDFILE=/var/run/sesamo.pid
 ```
 
 ### Setup AWS credentials

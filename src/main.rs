@@ -29,7 +29,7 @@ async fn main() -> anyhow::Result<()> {
     );
     info!("initializing web service...");
     let web_service =
-        web::WebServer::init(config.web_port, aws_config, &config.email_sender).await?;
+        web::WebServer::init(&config.listen_url, aws_config, &config.email_sender).await?;
 
     #[cfg(target_family = "unix")]
     if let Some(pidfile) = config.pidfile.as_deref() {
