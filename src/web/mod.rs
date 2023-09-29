@@ -30,7 +30,7 @@ impl WebServer {
         info!("webserver initialized");
         info!("web port: {web_port}");
 
-        let listener = TcpListener::bind(format!("0.0.0.0:{web_port}"))?;
+        let listener = TcpListener::bind(format!("127.0.0.1:{web_port}"))?;
 
         let server = {
             let email_sender = email_sender.to_string();
