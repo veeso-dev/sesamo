@@ -26,7 +26,7 @@ fi
 
 start() {
   CMD=$(which sesamo)
-  if [ -z "$SESAMO_PATH" ]; then
+  if [ -z "$CMD" ]; then
     CMD="cargo make -p production run"
   fi
 
