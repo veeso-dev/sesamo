@@ -6,7 +6,6 @@ use std::path::PathBuf;
 
 /// App configuration read from environment
 #[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub struct Config {
     pub email_sender: String,
     pub listen_url: String,
