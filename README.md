@@ -1,7 +1,7 @@
 # sesamo
 
 <p align="center">Developed by <a href="https://veeso.dev/" target="_blank">@veeso</a></p>
-<p align="center">Current version: 0.1.0 (29/09/2023)</p>
+<p align="center">Current version: 0.2.0 (31/01/2024)</p>
 
 <p align="center">
   <a href="https://opensource.org/license/mit/"

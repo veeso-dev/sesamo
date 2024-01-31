@@ -1,6 +1,6 @@
 [package]
 name = "sesamo"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Christian Visintin <christian.visintin@veeso.dev>"]
 edition = "2021"
 categories = ["network-programming"]
@@ -18,8 +18,8 @@ name = "sesamo"
 path = "src/main.rs"
 
 [dependencies]
-aws-config = "0.56"
-aws-sdk-sesv2 = "0.31"
+aws-config = "1.1"
+aws-sdk-sesv2 = "1.12"
 actix-web = "^4"
 anyhow = "^1"
 base64 = "^0.21"
@@ -32,5 +32,5 @@ tracing-subscriber = "^0.3"
 
 [dev-dependencies]
 actix-rt = "^2"
-env_logger = "^0.10"
+env_logger = "^0.11"
 pretty_assertions = "^1"

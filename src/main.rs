@@ -12,6 +12,8 @@ mod web;
 use std::io::Write;
 use std::path::Path;
 
+use aws_config::BehaviorVersion;
+
 const APP_NAME: &str = env!("CARGO_PKG_NAME");
 const APP_AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 const APP_VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -22,7 +24,7 @@ async fn main() -> anyhow::Result<()> {
     info!("{APP_NAME} v{APP_VERSION} - developed by {APP_AUTHORS}");
     let config = config::Config::try_from_env()?;
     info!("initializing Aws Config...");
-    let aws_config = aws_config::load_from_env().await;
+    let aws_config = aws_config::load_defaults(BehaviorVersion::latest()).await;
     info!(
         "AWS configuration loaded for region: {:?}",
         aws_config.region()

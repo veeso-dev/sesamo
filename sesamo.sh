@@ -25,7 +25,12 @@ if [ -z "$CARGO" ]; then
 fi
 
 start() {
-  screen -S sesamo -d -m cargo make -p production run
+  CMD=$(which sesamo)
+  if [ -z "$SESAMO_PATH" ]; then
+    CMD="cargo make -p production run"
+  fi
+
+  screen -S sesamo -d -m $CMD
 
   return $?
 }

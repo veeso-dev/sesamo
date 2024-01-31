@@ -31,8 +31,8 @@ impl AwsSesClient {
                 .collect()]))
             .build();
 
-        let subject_content = Content::builder().data(subject).charset("UTF-8").build();
-        let body_content = Content::builder().data(content).charset("UTF-8").build();
+        let subject_content = Content::builder().data(subject).charset("UTF-8").build()?;
+        let body_content = Content::builder().data(content).charset("UTF-8").build()?;
         let body = Body::builder().html(body_content).build();
 
         let msg = Message::builder()
@@ -40,6 +40,7 @@ impl AwsSesClient {
             .body(body)
             .build();
 
+        debug!("msg: {msg:?}");
         let email_content = EmailContent::builder().simple(msg).build();
 
         debug!("email content: {content}");
