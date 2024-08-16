@@ -11,7 +11,7 @@
   /></a>
   <a href="https://github.com/veeso-dev/sesamo/stargazers"
     ><img
-      src="https://img.shields.io/github/stars/veeso-dev/sesamo.svg"
+      src="https://img.shields.io/github/stars/veeso-dev/sesamo.svg?style=badge"
       alt="Repo stars"
   /></a>
 </p>
